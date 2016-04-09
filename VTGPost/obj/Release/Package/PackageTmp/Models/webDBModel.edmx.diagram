@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2b73c3cc0e2b4d0daffc8292fca25f42" Name="Diagram1" ZoomLevel="76">
+        <EntityTypeShape EntityType="WebsiteDBModel.HotLine" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteDBModel.News" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebsiteDBModel.NewsCategory" Width="1.5" PointX="5.75" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="WebsiteDBModel.FK_NewsCategory_News" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WebsiteDBModel.AccessControlList" Width="1.5" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="WebsiteDBModel.AccessList" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="WebsiteDBModel.RoleInfo" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="WebsiteDBModel.UserInfo" Width="1.5" PointX="0.75" PointY="8.125" />
+        <EntityTypeShape EntityType="WebsiteDBModel.UserRole" Width="1.5" PointX="3" PointY="5.125" />
+        <AssociationConnector Association="WebsiteDBModel.FK_AccessList_AccessControlList" />
+        <AssociationConnector Association="WebsiteDBModel.FK_RoleInfo_AccessControlList" />
+        <AssociationConnector Association="WebsiteDBModel.FK_RoleInfo_UserRole" />
+        <AssociationConnector Association="WebsiteDBModel.FK_UserInfo_UserRole" />
+        <AssociationConnector Association="WebsiteDBModel.FK_AccessList" />
+        <EntityTypeShape EntityType="WebsiteDBModel.BannerImage" Width="1.5" PointX="5.625" PointY="5" />
+        <EntityTypeShape EntityType="WebsiteDBModel.BillOfLading" Width="1.5" PointX="3.625" PointY="10.125" />
+        <EntityTypeShape EntityType="WebsiteDBModel.Customer" Width="1.5" PointX="5.875" PointY="8.125" />
+        <AssociationConnector Association="WebsiteDBModel.FK_Customer_BillOfLading" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

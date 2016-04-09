@@ -1,0 +1,195 @@
+﻿@using VTGPost.Helper
+@using VTGPost.Models
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Chuyển Phát Nhanh - Vượt Thời Gian</title>
+    @Styles.Render("~/frontendStyle")
+    @Styles.Render("~/nivoSlider")
+    @Styles.Render("~/elastislide")
+   
+    @Scripts.Render("~/SpryAssets/js")
+    @Styles.Render("~/SpryAssets")
+    @Styles.Render("~/rondell")
+  </head>    
+    <body>
+    <div class="wrapper">
+      <div class="container">
+        <div class="sidebar1">
+          <div class="logo">
+            <a href=""><img src="@Href("~/Images/logo.jpg")" alt="" id="logo" ></a>
+          </div>
+          <div class="tracking">
+            <fieldset>
+              <legend>Định vị bưu phẩm</legend>
+                @using(Html.BeginForm("TrackAndTrace", "Home", FormMethod.Post))
+                {
+                    <textarea name="tracking_id" id="tracking_id" placeholder="Mã BP/BK"></textarea>
+                    <button class="btn" type="submit">Tracking</button>
+                }
+            </fieldset>
+          </div>
+          <div class="hot-lines">
+            <div class="phone">
+              <strong>Hot line</strong>: (08) 6 251 32 22
+            </div>
+            <div class="bg_icon_support">
+              <div class="bg_yahoo">
+                <div style="">Yahoo</div>
+                <div style="">TP.HCM</div>
+                <div id="dnn_ctr415_HoTroTrucTuyen_yahoo1" style=""><a style="" href="ymsgr:sendIM?vtg.post.vn"><img src="http://opi.yahoo.com/online?u=vtg.post.vn&amp;m=g&amp;t=1" alt="Yahoo Messenger Icons" border="0"></a></div>
+                <div style="">HÀ NỘI</div>
+                <div id="dnn_ctr415_HoTroTrucTuyen_yahoo2" style=""><a style="" href="ymsgr:sendIM?vtg2.post.vn"><img src="http://opi.yahoo.com/online?u=vtg2.post.vn&amp;m=g&amp;t=1" alt="Yahoo Messenger Icons" border="0"></a></div>
+              </div>
+              <div class="bg_skype">
+                <div style="color: #7A7A7A;font-weight: bold;margin-bottom: 5px;text-align:center;">Skype</div>
+                <div style="">TP.HCM</div>
+                <div id="dnn_ctr415_HoTroTrucTuyen_skype1" style="margin-left:9px;"><a href="skype:vtg.post.vn?chat"><img src="http://mystatus.skype.com/smallclassic/vtg.post.vn" style="border: none;" width="80" height="17" alt="My status"></a></div>
+                <div style="">TP.HCM</div>
+                <div id="dnn_ctr415_HoTroTrucTuyen_skype2" style="margin-left:9px;margin-top:4px;"><a href="skype:vtg2.post.vn?chat"><img src="http://mystatus.skype.com/smallclassic/vtg2.post.vn" style="border: none;" width="80" height="17" alt="My status"></a></div>
+              </div>
+            </div>
+          </div>
+          <div class="hot-news">
+            <h4>LATEST NEWS</h4>
+            <ul>
+              @foreach(var news in (List<VTGPost.Models.News>)HttpContext.Current.Cache[SiteConfig.HotNewsCache])
+              {
+                  <li>@Html.ActionLink(news.Title, "News", new { @id = news.NewsId})</li>   
+              }
+            </ul>
+          </div>
+          <!-- end .sidebar1 --></div>
+          <div class="content">
+            <div class="social-network">
+              <span class='st_facebook_hcount' displayText='Facebook'></span>
+              <span class='st_twitter_hcount' displayText='Tweet'></span>
+              <span class='st_linkedin_hcount' displayText='LinkedIn'></span>
+              <span class='st_email_hcount' displayText='Email'></span>
+            </div>
+            <div class="main-slider">
+              <div class="slider-wrapper theme-light">
+                  <div id="slider" class="nivoSlider">
+                      @{
+                          foreach (var banner in (List<BannerImage>)ViewBag.Banners)
+                          {
+                              <img src="@Href(SiteConfig.BannerFolder + banner.ImageName)" data-thumb="@Href(SiteConfig.BannerFolder + banner.ImageName)" alt="@banner.Title" title="@banner.Title" />
+                          }
+                      }
+                  </div>
+                @*<div id="htmlcaption" class="nivo-html-caption">
+                  <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+                </div>*@
+              </div>
+            </div>
+              <div class="main-menu">
+                  <ul id="MenuBar1" class="MenuBarHorizontal">
+                      <li>@Html.ActionLink("Trang chủ", "Index", "Home", null, new { @class = ViewBag.Home })
+                      </li>
+                      <li>@Html.ActionLink("Giới thiệu", "About", "Home", null, new { @class = ViewBag.About })
+                      </li>
+                      <li>@Html.ActionLink("Dịch vụ", "Index", "Home", null, new { @class = ViewBag.Services })
+                          <ul>
+                               @foreach(var news in (List<VTGPost.Models.News>)HttpContext.Current.Cache[SiteConfig.ServicePagesCache])
+                                {
+                                    <li>@Html.ActionLink(news.Title, "Services", "Home", new { @id = news.NewsId}, null)</li>   
+                                }
+                          </ul>
+                      </li>
+                      <li>@Html.ActionLink("Tin tức", "News", "Home", null, new { @class = ViewBag.Info })</li>
+                      <li>@Html.ActionLink("Quản lý chất lượng", "Control", "Home", null, new { @class = ViewBag.Control })</li>
+                      <li>@Html.ActionLink("Liên hệ", "Contact", "Home", null, new { @class = ViewBag.Contact })</li>
+                      <li>@Html.ActionLink("Tuyển dụng", "Recruitment", "Home", null, new { @class = ViewBag.Recruitment })</li>
+                  </ul>
+                  <div class="clearfix"></div>
+              </div>
+              @RenderSection("ads", false)
+            <div class="main-content">
+              @RenderBody()
+                <!-- end .main-content -->
+
+            </div>
+              <div class="recent-customers">
+                <h3>Khách hàng tiêu biểu</h3>
+                <!-- Elastislide Carousel -->
+                  <ul id="carousel" class="elastislide-list">
+                      @foreach (var cus in (List<VTGPost.Models.Customer>)HttpContext.Current.Cache[SiteConfig.CustomerCache])
+                      {
+                          <li>
+                              <a href="@cus.Website">
+                                  <img src="@Href(SiteConfig.CustomerLogo + cus.Logo)" alt="@cus.CustomerName" />    
+                              </a>
+                          </li>   
+                      }
+                  </ul>
+                <!-- End Elastislide Carousel -->
+              </div>
+              <!-- end .content --></div>
+              <!-- end .container --></div>
+              <div class="footer">
+                <div class="art-footer-body">
+                  <div id="dnn_diachicongty" class="adress"><a name="537"></a><div id="dnn_ctr537_ContentPane"><!-- Start_Module_537 --><div id="dnn_ctr537_ModuleContent" class="DiaChiCongTyContent">
+                  <span id="dnn_ctr537_DiaChiCongTyl_diachi" style="color: #F8F80D; font-weight: bold;"><div>Công ty Vượt Thời Gian </div>
+                  <div>458 Nguyễn Văn Công, P.3, Q.Gò Vấp, Tp.HCM</div>
+                  <div>Tel: (08) 6 251 32 22</div></span>
+                  </div><!-- End_Module_537 --></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+          @Scripts.Render("~/elastislide/js")
+          @Scripts.Render("~/rondell/js")
+        @Scripts.Render("~/elastislide/js1")
+          @Scripts.Render("~/nivoSlider/js")
+          
+         <script type="text/javascript">
+            jQuery(document).ready(function ($) {
+                $('#slider').nivoSlider({
+                    effect: 'random',               // Specify sets like: 'fold,fade,sliceDown'
+                    slices: 15,                     // For slice animations
+                    boxCols: 8,                     // For box animations
+                    boxRows: 4,                     // For box animations
+                    animSpeed: 500,                 // Slide transition speed
+                    pauseTime: 3000,                // How long each slide will show
+                    startSlide: 0,                  // Set starting Slide (0 index)
+                    directionNav: false,             // Next & Prev navigation
+                    controlNav: false,               // 1,2,3... navigation
+                    controlNavThumbs: false,        // Use thumbnails for Control Nav
+                    pauseOnHover: true,             // Stop animation while hovering
+                    manualAdvance: false,           // Force manual transitions
+                    prevText: 'Prev',               // Prev directionNav text
+                    nextText: 'Next',               // Next directionNav text
+                    randomStart: false,             // Start on a random slide
+                    beforeChange: function () { },     // Triggers before a slide transition
+                    afterChange: function () { },      // Triggers after a slide transition
+                    slideshowEnd: function () { },     // Triggers after all slides have been shown
+                    lastSlide: function () { },        // Triggers when last slide is shown
+                    afterLoad: function () { }         // Triggers when slider has loaded
+                });
+                $('#carousel').elastislide();
+                $("#rondellCarousel").rondell({
+                    preset: "carousel",
+                    radius: {
+                        x: 130
+                    },
+                    center: {
+                        left: 380,
+                        top: 110
+                    },
+                    itemProperties: {
+                        size: {
+                            //width: 200,
+                            height: 100
+                        }
+                    }
+                });
+            });
+            var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1");
+        </script>
+        <script type="text/javascript">var switchTo5x = true;</script>
+        <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+        <script type="text/javascript">stLight.options({ publisher: "0507297f-021d-4f1b-af15-0abed9c8487d", doNotHash: false, doNotCopy: false, hashAddressBar: false });</script>
+        </body>
+</html>

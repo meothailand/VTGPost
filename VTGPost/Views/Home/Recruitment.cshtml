@@ -1,0 +1,22 @@
+﻿@model List<VTGPost.Models.News>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.News != null)
+{
+    var news = (VTGPost.Models.News) ViewBag.News;
+    
+    <h1>@news.Title</h1>
+    
+    @Html.Raw(news.Content)
+}
+
+<h4 class="newsList">Tin tuyển dụng khác</h4>
+@foreach(var item in Model)
+{
+    <ul>
+        <li>@Html.ActionLink(item.Title, "Recruitment", "Home", new { id = item.NewsId }, null)</li>
+    </ul>
+}

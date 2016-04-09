@@ -1,0 +1,236 @@
+/*custom css*/
+a {
+	 text-decoration: none;
+}
+
+img#logo{
+	width: 180px;
+	height: 90px;
+}
+
+div.footer{
+	width: 960px;
+	background: #dc3030;
+}
+
+.wrapper {
+	width: 960px;
+	background: #FFF;
+	margin: 10px auto; /* the auto value on the sides, coupled with the width, centers the layout */
+	overflow: hidden; /* this declaration makes the .container understand where the floated columns within ends and contain them */
+	box-shadow: 0px 0px 5px #888;
+	border-top: 7px solid #dc3030;
+}
+#tracking_id{
+	width: 140px;
+	margin: 5px auto;
+	max-width: 140px;
+	max-height: 40px;
+	height: 40px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 40px;
+}
+
+div.tracking{
+	border-top: 2px solid #dc3030;
+	margin-bottom: 10px;
+}
+
+div.tracking > fieldset{
+	border: 1px solid #D8D8D8;
+}
+
+div.logo{
+	margin-bottom: 10px;
+}
+
+div.hot-lines{
+	padding: 5px;
+	text-align: center;
+}
+
+div.hot-lines > div.phone{
+	border-bottom: 1px solid #dc3030;
+
+}
+div.hot-news{
+	padding: 5px;
+}
+div.hot-news>h4:first-child{
+	text-align: center;
+	border-bottom: 1px solid #dc3030;
+	margin: 10px 0px;
+}
+
+div.hot-news > ul {
+	list-style-type: square;
+	padding-left: 20px;
+}
+
+::selection {color:white;background:red;}
+::-moz-selection {color:white;background:red;}
+
+ul.menu{
+	list-style: none;
+}
+
+nav {
+	background: yellow;
+	/* background-image: linear-gradient(#fff, #ccc); */
+	border-radius: 0;
+	box-shadow: none;
+	/* padding: 0 10px; */
+	position: relative;
+}
+
+.menu li a:hover {
+	background: -webkit-gradient(linear, center top, center bottom, from(#ededed), to(#fff));
+	background-image: linear-gradient(#ededed, #fff);
+	border-radius: 0px;
+	box-shadow: inset 0px 0px 1px 1px rgba(0,0,0,0.1);
+	color: #222;
+}
+
+div.main-menu{
+	padding: 0px 0px 0px 0px;
+	background: yellow;
+	margin: 5px 10px;
+}
+
+ul.MenuBarHorizontal a {
+	background-color: #FFFF00 !important;
+	color: #000 !important;
+}
+
+ul.MenuBarHorizontal a:hover, ul.MenuBarHorizontal a:focus {
+	background-color: #F72E08 !important;
+	color: white !important;
+}
+
+ul.MenuBarHorizontal a.MenuBarItemSubmenu {
+	background-image: none !important;
+}
+
+
+ul.MenuBarHorizontal li{
+	border-left: 1px solid red;
+	width: auto !important;
+}
+
+ul.MenuBarHorizontal ul {
+	width: 200px !important;
+}
+
+ul.MenuBarHorizontal ul li {
+	width: 100% !important;
+}
+
+ul.MenuBarHorizontal a{
+	padding: 0.5em 16px !important;
+}
+
+div.social-network{
+	margin-left: 10px;
+}
+
+ul.MenuBarHorizontal a.active{
+	background-color: #F72E08 !important;
+	color: white !important;
+}
+
+.elastislide-horizontal {
+	padding: 10px 10px !important;
+	margin: 0px 10px !important;
+}
+
+div.recent-customers > h3{
+	color: red;
+	border-bottom: 1px solid #888;
+	margin-left: 10px;
+}
+
+h4.newsList {
+    border-bottom: 1px solid #888;
+	margin-left: 10px;
+}
+
+.theme-light.slider-wrapper {
+	padding: 4px 10px 0 10px !important;
+}
+
+
+.ui-jcoverflip {
+position: relative;
+}
+
+.ui-jcoverflip--item {
+position: absolute;
+display: block;
+}
+
+/* Basic sample CSS */
+#flip {
+height: 200px;
+width: 630px;
+margin-bottom: 50px;
+}
+
+#flip .ui-jcoverflip--title {
+position: absolute;
+bottom: -30px;
+width: 100%;
+text-align: center;
+color: #555;
+}
+
+#flip img {
+display: block;
+border: 0;
+outline: none;
+}
+
+#flip a {
+outline: none;
+}
+
+
+#wrapper {
+height: 150px;
+width: 780px;
+overflow: hidden;
+position: relative;
+}
+
+.ui-jcoverflip--item {
+cursor: pointer;
+}
+
+#scrollbar {
+position: absolute;
+left: 20px;
+right: 20px;
+}
+div.ads{
+	margin: 10px;
+	border-radius: 6px;
+	box-shadow: 0 0 20px #A7A7A7 inset;
+}
+
+p.tracing {
+    font-size: 14pt;
+    color: darkblue;
+}
+
+ul.tracing {
+    margin: 0 0 0 -5px;
+    font-size: 11pt;
+}
+
+ul.tracing li {
+    margin: 5px 0 0 0;
+}
+
+div.mapContainer {
+    padding: 30px;
+}

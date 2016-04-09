@@ -1,0 +1,120 @@
+﻿@using VTGPost.Helper
+@model VTGPost.Models.BannerImage
+
+@{
+    Layout = "~/Areas/ManageSite/Views/Shared/_ManageSiteLayout.cshtml";
+}
+
+@section CustomStyle{
+    <link href="@Href("~/Content/backend/plugins/select2/select2_metro.css")" rel="stylesheet" type="text/css"/>
+     <link rel="stylesheet" type="text/css" href="@Href("~/Content/backend/plugins/bootstrap-fileupload/bootstrap-fileupload.css")"/>
+}
+
+<div class="portlet box messageBox">
+     <span class="messageBox">@ViewBag.SaveMessage</span>
+</div>
+<div class="portlet box yellow">
+<div class="portlet-title">
+    <div class="caption">
+       <i class="fa fa-reorder"></i>Banners								
+    </div>
+    <div class="tools">
+        <a href="javascript:;" class="collapse"></a>
+    </div>
+</div>
+<div class="portlet-body form">
+    <!-- BEGIN FORM-->
+    @using (Html.BeginForm("NewBanner", "ManageBanner", FormMethod.Post, new { @class="form-horizontal", @enctype="multipart/form-data"})){
+        <div class="form-actions top fluid">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn green">Submit</button>
+                <button type="button" class="btn default" onclick="javascript:window.location.href='/ManageSite/ManageBanner/Banners';">Cancel</button>
+            </div>
+        </div>
+        <div class="form-body">
+           @Html.HiddenFor(i => i.ImageId)
+           @Html.HiddenFor(i => i.ImageName)
+            <div class="form-group">
+                <label class="col-md-3 control-label">Title (tiêu đề)</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(i => i.Title, new { @class="form-control", @placeholder="Enter text - Maximum 100 characters", @maxlength="100"})
+                    @*<span class="help-block">A block of help text.
+                    </span>*@
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Description (Mô tả)</label>
+                <div class="col-md-9">
+                    @Html.TextAreaFor(i => i.BannerDescription, new { @class="form-control maxlengthCheck", 
+                                                                      @placeholder="Abstract - Maximum 300 characters", 
+                                                                      @rows="2", @maxlength="300"})
+                    <span class="help-block">
+                    </span>
+                </div>
+            </div>
+            @if(Model != null)
+            {
+            <div class="form-group">
+                <label class="col-md-3 control-label">Current image (hình hiện tại)</label>
+                <div class="col-md-9">
+                    <img src="@Href((Model.BannerType == 1 ? SiteConfig.BannerFolder : SiteConfig.AdsFolder) + Model.ImageName)" 
+                         alt="@Model.Title" title="@Model.Title" />
+                    <span class="help-block">
+                    </span>
+                </div>
+            </div>
+            }
+            <div class="form-group">
+                <label class="control-label col-md-3">Image (Hình ảnh)</label>
+                <div class="col-md-9">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                        <input name="" value="" type="hidden">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <span class="uneditable-input">
+                                    <i class="fa fa-file fileupload-exists"></i>
+                                    <span class="fileupload-preview"></span>
+                                </span>
+                            </span>
+                            <span class="btn default btn-file">
+                                <span class="fileupload-new">
+                                    <i class="fa fa-paper-clip"></i>Select file
+                                </span>
+                                <span class="fileupload-exists">
+                                    <i class="fa fa-undo"></i>Change
+                                </span>
+                                <input name="bannerImage" class="default" type="file">
+                            </span>
+                            <a href="#" class="btn red fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i>Remove</a>
+                        </div>
+                    </div>
+                    <span class="help-block">
+                        Best image dimensions for Top banner <strong>790 x 190</strong> (Kích thước cho Top banner 780 x 190)<br />
+                        Support file types: jpeg, jpg, png (Định dạng hình ảnh hỗ trợ: jpeg, jpg, png)<br />
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Type (Loại banner)</label>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(i => i.BannerType, (SelectList)ViewBag.Category, new { @class="form-control input-medium select2me"})
+                </div>
+            </div>
+            <div class="form-group last">
+                <label class="col-md-3 control-label">Is Active (Kích hoạt)</label>
+                <div class="col-md-9">
+                    @Html.CheckBoxFor(i => i.IsActive, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="form-actions fluid">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn green">Submit</button>
+                <button type="button" class="btn default" onclick="javascript:window.location.href='/ManageSite/ManageBanner/Banners';">Cancel</button>
+            </div>
+        </div>
+    }
+    <!-- END FORM-->
+</div>
+								
+</div>

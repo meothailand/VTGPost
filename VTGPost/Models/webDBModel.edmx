@@ -1,0 +1,681 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WebsiteDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="WebsiteDBModelStoreContainer">
+          <EntitySet Name="AccessControlList" EntityType="WebsiteDBModel.Store.AccessControlList" store:Type="Tables" Schema="vtg49f80_sun" />
+          <EntitySet Name="AccessList" EntityType="WebsiteDBModel.Store.AccessList" store:Type="Tables" Schema="vtg49f80_sun" />
+          <EntitySet Name="BannerImage" EntityType="WebsiteDBModel.Store.BannerImage" store:Type="Tables" Schema="vtg49f80_sun" />
+          <EntitySet Name="BillOfLading" EntityType="WebsiteDBModel.Store.BillOfLading" store:Type="Tables" Schema="vtg49f80_sun" />
+          <EntitySet Name="Customer" EntityType="WebsiteDBModel.Store.Customer" store:Type="Tables" Schema="vtg49f80_sun" />
+          <EntitySet Name="HotLine" EntityType="WebsiteDBModel.Store.HotLine" store:Type="Tables" Schema="vtg49f80_sun" />
+          <EntitySet Name="News" EntityType="WebsiteDBModel.Store.News" store:Type="Tables" Schema="vtg49f80_sun" />
+          <EntitySet Name="NewsCategory" EntityType="WebsiteDBModel.Store.NewsCategory" store:Type="Tables" Schema="vtg49f80_sun" />
+          <EntitySet Name="RoleInfo" EntityType="WebsiteDBModel.Store.RoleInfo" store:Type="Tables" Schema="vtg49f80_sun" />
+          <EntitySet Name="UserInfo" EntityType="WebsiteDBModel.Store.UserInfo" store:Type="Tables" Schema="vtg49f80_sun" />
+          <EntitySet Name="UserRole" EntityType="WebsiteDBModel.Store.UserRole" store:Type="Tables" Schema="vtg49f80_sun" />
+          <AssociationSet Name="FK_AccessList" Association="WebsiteDBModel.Store.FK_AccessList">
+            <End Role="AccessList" EntitySet="AccessList" />
+            <End Role="AccessList1" EntitySet="AccessList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccessList_AccessControlList" Association="WebsiteDBModel.Store.FK_AccessList_AccessControlList">
+            <End Role="AccessList" EntitySet="AccessList" />
+            <End Role="AccessControlList" EntitySet="AccessControlList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_BillOfLading" Association="WebsiteDBModel.Store.FK_Customer_BillOfLading">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="BillOfLading" EntitySet="BillOfLading" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsCategory_News" Association="WebsiteDBModel.Store.FK_NewsCategory_News">
+            <End Role="NewsCategory" EntitySet="NewsCategory" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleInfo_AccessControlList" Association="WebsiteDBModel.Store.FK_RoleInfo_AccessControlList">
+            <End Role="RoleInfo" EntitySet="RoleInfo" />
+            <End Role="AccessControlList" EntitySet="AccessControlList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleInfo_UserRole" Association="WebsiteDBModel.Store.FK_RoleInfo_UserRole">
+            <End Role="RoleInfo" EntitySet="RoleInfo" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_UserRole" Association="WebsiteDBModel.Store.FK_UserInfo_UserRole">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AccessControlList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MenuId" Type="int" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="AccessList">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MenuDisplayText" Type="nvarchar" MaxLength="100" />
+          <Property Name="RelativeLink" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ParentMenu" Type="int" />
+        </EntityType>
+        <EntityType Name="BannerImage">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ImageName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="BannerDescription" Type="nvarchar" MaxLength="300" />
+          <Property Name="BannerType" Type="int" />
+        </EntityType>
+        <EntityType Name="BillOfLading">
+          <Key>
+            <PropertyRef Name="BillCode" />
+          </Key>
+          <Property Name="BillCode" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Sender" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="SenderAddress" Type="nvarchar" MaxLength="300" />
+          <Property Name="SenderContactName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SenderTel" Type="varchar" MaxLength="20" />
+          <Property Name="SentDate" Type="datetime" Nullable="false" />
+          <Property Name="Receiver" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReceiverAddress" Type="nvarchar" MaxLength="300" />
+          <Property Name="ReceiverTel" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="DeliveryStaff" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReceivedDate" Type="datetime" />
+          <Property Name="RetransferTime1" Type="datetime" />
+          <Property Name="Reason1" Type="nvarchar" MaxLength="200" />
+          <Property Name="RetransferTime2" Type="datetime" />
+          <Property Name="Reason2" Type="nvarchar" MaxLength="200" />
+          <Property Name="LadingStatus" Type="varchar" MaxLength="20" />
+          <Property Name="FailNote" Type="nvarchar" MaxLength="100" />
+          <Property Name="ReceiverContactName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ActualReceiver" Type="nvarchar" MaxLength="50" />
+          <Property Name="Customer" Type="int" />
+          <Property Name="IsReadOnly" Type="bit" Nullable="false" />
+          <Property Name="Acceptor" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Logo" Type="varchar" MaxLength="100" />
+          <Property Name="Website" Type="varchar" MaxLength="100" />
+          <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactNumber" Type="varchar" MaxLength="20" />
+          <Property Name="ContactCellPhone" Type="varchar" MaxLength="20" />
+          <Property Name="CustomerAddress" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="HotLine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LoginName" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="LineType" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="DisplayText" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="NewsId" />
+          </Key>
+          <Property Name="NewsId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Abstract" Type="nvarchar" MaxLength="200" />
+          <Property Name="Content" Type="ntext" />
+          <Property Name="PostedDate" Type="datetime" />
+          <Property Name="Category" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RoleInfo">
+          <Key>
+            <PropertyRef Name="RoleName" />
+          </Key>
+          <Property Name="RoleName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="RoleDescription" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PassCode" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="UserCode" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="RoleName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AccessList">
+          <End Role="AccessList" Type="WebsiteDBModel.Store.AccessList" Multiplicity="0..1" />
+          <End Role="AccessList1" Type="WebsiteDBModel.Store.AccessList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessList">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="AccessList1">
+              <PropertyRef Name="ParentMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccessList_AccessControlList">
+          <End Role="AccessList" Type="WebsiteDBModel.Store.AccessList" Multiplicity="1" />
+          <End Role="AccessControlList" Type="WebsiteDBModel.Store.AccessControlList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessList">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="AccessControlList">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_BillOfLading">
+          <End Role="Customer" Type="WebsiteDBModel.Store.Customer" Multiplicity="0..1" />
+          <End Role="BillOfLading" Type="WebsiteDBModel.Store.BillOfLading" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BillOfLading">
+              <PropertyRef Name="Customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsCategory_News">
+          <End Role="NewsCategory" Type="WebsiteDBModel.Store.NewsCategory" Multiplicity="1" />
+          <End Role="News" Type="WebsiteDBModel.Store.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleInfo_AccessControlList">
+          <End Role="RoleInfo" Type="WebsiteDBModel.Store.RoleInfo" Multiplicity="1" />
+          <End Role="AccessControlList" Type="WebsiteDBModel.Store.AccessControlList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleInfo">
+              <PropertyRef Name="RoleName" />
+            </Principal>
+            <Dependent Role="AccessControlList">
+              <PropertyRef Name="RoleName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleInfo_UserRole">
+          <End Role="RoleInfo" Type="WebsiteDBModel.Store.RoleInfo" Multiplicity="1" />
+          <End Role="UserRole" Type="WebsiteDBModel.Store.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleInfo">
+              <PropertyRef Name="RoleName" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_UserRole">
+          <End Role="UserInfo" Type="WebsiteDBModel.Store.UserInfo" Multiplicity="1" />
+          <End Role="UserRole" Type="WebsiteDBModel.Store.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WebsiteDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="WebsiteDBEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="HotLines" EntityType="WebsiteDBModel.HotLine" />
+          <EntitySet Name="News" EntityType="WebsiteDBModel.News" />
+          <EntitySet Name="NewsCategories" EntityType="WebsiteDBModel.NewsCategory" />
+          <AssociationSet Name="FK_NewsCategory_News" Association="WebsiteDBModel.FK_NewsCategory_News">
+            <End Role="NewsCategory" EntitySet="NewsCategories" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <EntitySet Name="AccessControlLists" EntityType="WebsiteDBModel.AccessControlList" />
+          <EntitySet Name="AccessLists" EntityType="WebsiteDBModel.AccessList" />
+          <EntitySet Name="RoleInfoes" EntityType="WebsiteDBModel.RoleInfo" />
+          <EntitySet Name="UserInfoes" EntityType="WebsiteDBModel.UserInfo" />
+          <EntitySet Name="UserRoles" EntityType="WebsiteDBModel.UserRole" />
+          <AssociationSet Name="FK_AccessList_AccessControlList" Association="WebsiteDBModel.FK_AccessList_AccessControlList">
+            <End Role="AccessList" EntitySet="AccessLists" />
+            <End Role="AccessControlList" EntitySet="AccessControlLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleInfo_AccessControlList" Association="WebsiteDBModel.FK_RoleInfo_AccessControlList">
+            <End Role="RoleInfo" EntitySet="RoleInfoes" />
+            <End Role="AccessControlList" EntitySet="AccessControlLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleInfo_UserRole" Association="WebsiteDBModel.FK_RoleInfo_UserRole">
+            <End Role="RoleInfo" EntitySet="RoleInfoes" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_UserRole" Association="WebsiteDBModel.FK_UserInfo_UserRole">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccessList" Association="WebsiteDBModel.FK_AccessList">
+            <End Role="AccessList" EntitySet="AccessLists" />
+            <End Role="AccessList1" EntitySet="AccessLists" />
+          </AssociationSet>
+          <EntitySet Name="BannerImages" EntityType="WebsiteDBModel.BannerImage" />
+          <EntitySet Name="BillOfLadings" EntityType="WebsiteDBModel.BillOfLading" />
+          <EntitySet Name="Customers" EntityType="WebsiteDBModel.Customer" />
+          <AssociationSet Name="FK_Customer_BillOfLading" Association="WebsiteDBModel.FK_Customer_BillOfLading">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="BillOfLading" EntitySet="BillOfLadings" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="HotLine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="LineType" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="DisplayText" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="NewsId" />
+          </Key>
+          <Property Name="NewsId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Abstract" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PostedDate" Type="DateTime" Precision="3" />
+          <Property Name="Category" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="NewsCategory" Relationship="WebsiteDBModel.FK_NewsCategory_News" FromRole="News" ToRole="NewsCategory" />
+        </EntityType>
+        <EntityType Name="NewsCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="News" Relationship="WebsiteDBModel.FK_NewsCategory_News" FromRole="NewsCategory" ToRole="News" />
+        </EntityType>
+        <Association Name="FK_NewsCategory_News">
+          <End Role="NewsCategory" Type="WebsiteDBModel.NewsCategory" Multiplicity="1" />
+          <End Role="News" Type="WebsiteDBModel.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AccessControlList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="MenuId" Nullable="false" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AccessList" Relationship="WebsiteDBModel.FK_AccessList_AccessControlList" FromRole="AccessControlList" ToRole="AccessList" />
+          <NavigationProperty Name="RoleInfo" Relationship="WebsiteDBModel.FK_RoleInfo_AccessControlList" FromRole="AccessControlList" ToRole="RoleInfo" />
+        </EntityType>
+        <EntityType Name="AccessList">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Type="Int32" Name="MenuId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="MenuDisplayText" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RelativeLink" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <NavigationProperty Name="AccessControlLists" Relationship="WebsiteDBModel.FK_AccessList_AccessControlList" FromRole="AccessList" ToRole="AccessControlList" />
+          <Property Type="Int32" Name="ParentMenu" />
+          <NavigationProperty Name="AccessList1" Relationship="WebsiteDBModel.FK_AccessList" FromRole="AccessList" ToRole="AccessList1" />
+          <NavigationProperty Name="AccessList2" Relationship="WebsiteDBModel.FK_AccessList" FromRole="AccessList1" ToRole="AccessList" />
+        </EntityType>
+        <EntityType Name="RoleInfo">
+          <Key>
+            <PropertyRef Name="RoleName" />
+          </Key>
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RoleDescription" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AccessControlLists" Relationship="WebsiteDBModel.FK_RoleInfo_AccessControlList" FromRole="RoleInfo" ToRole="AccessControlList" />
+          <NavigationProperty Name="UserRoles" Relationship="WebsiteDBModel.FK_RoleInfo_UserRole" FromRole="RoleInfo" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FullName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PassCode" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="UserCode" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserRoles" Relationship="WebsiteDBModel.FK_UserInfo_UserRole" FromRole="UserInfo" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <NavigationProperty Name="RoleInfo" Relationship="WebsiteDBModel.FK_RoleInfo_UserRole" FromRole="UserRole" ToRole="RoleInfo" />
+          <NavigationProperty Name="UserInfo" Relationship="WebsiteDBModel.FK_UserInfo_UserRole" FromRole="UserRole" ToRole="UserInfo" />
+        </EntityType>
+        <Association Name="FK_AccessList_AccessControlList">
+          <End Type="WebsiteDBModel.AccessList" Role="AccessList" Multiplicity="1" />
+          <End Type="WebsiteDBModel.AccessControlList" Role="AccessControlList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessList">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="AccessControlList">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleInfo_AccessControlList">
+          <End Type="WebsiteDBModel.RoleInfo" Role="RoleInfo" Multiplicity="1" />
+          <End Type="WebsiteDBModel.AccessControlList" Role="AccessControlList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleInfo">
+              <PropertyRef Name="RoleName" />
+            </Principal>
+            <Dependent Role="AccessControlList">
+              <PropertyRef Name="RoleName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleInfo_UserRole">
+          <End Type="WebsiteDBModel.RoleInfo" Role="RoleInfo" Multiplicity="1" />
+          <End Type="WebsiteDBModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleInfo">
+              <PropertyRef Name="RoleName" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_UserRole">
+          <End Type="WebsiteDBModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+          <End Type="WebsiteDBModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccessList">
+          <End Type="WebsiteDBModel.AccessList" Role="AccessList" Multiplicity="0..1" />
+          <End Type="WebsiteDBModel.AccessList" Role="AccessList1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessList">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="AccessList1">
+              <PropertyRef Name="ParentMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BannerImage">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Type="Int32" Name="ImageId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ImageName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="Title" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="BannerDescription" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="BannerType" />
+        </EntityType>
+        <EntityType Name="BillOfLading">
+          <Key>
+            <PropertyRef Name="BillCode" />
+          </Key>
+          <Property Type="String" Name="BillCode" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Sender" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SenderAddress" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SenderContactName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SenderTel" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="SentDate" Nullable="false" Precision="3" />
+          <Property Type="String" Name="Receiver" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ReceiverAddress" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ReceiverTel" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DeliveryStaff" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ReceivedDate" Precision="3" />
+          <Property Type="DateTime" Name="RetransferTime1" Precision="3" />
+          <Property Type="String" Name="Reason1" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="RetransferTime2" Precision="3" />
+          <Property Type="String" Name="Reason2" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LadingStatus" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FailNote" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ReceiverContactName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ActualReceiver" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Customer" />
+          <Property Type="Boolean" Name="IsReadOnly" Nullable="false" />
+          <Property Type="String" Name="Acceptor" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer1" Relationship="WebsiteDBModel.FK_Customer_BillOfLading" FromRole="BillOfLading" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Logo" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Website" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ContactPerson" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ContactNumber" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ContactCellPhone" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BillOfLadings" Relationship="WebsiteDBModel.FK_Customer_BillOfLading" FromRole="Customer" ToRole="BillOfLading" />
+          <Property Type="String" Name="CustomerAddress" MaxLength="300" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Customer_BillOfLading">
+          <End Type="WebsiteDBModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="WebsiteDBModel.BillOfLading" Role="BillOfLading" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BillOfLading">
+              <PropertyRef Name="Customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WebsiteDBModelStoreContainer" CdmEntityContainer="WebsiteDBEntities">
+          <EntitySetMapping Name="HotLines">
+            <EntityTypeMapping TypeName="WebsiteDBModel.HotLine">
+              <MappingFragment StoreEntitySet="HotLine">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="LineType" ColumnName="LineType" />
+                <ScalarProperty Name="DisplayText" ColumnName="DisplayText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="WebsiteDBModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="NewsId" ColumnName="NewsId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Abstract" ColumnName="Abstract" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="PostedDate" ColumnName="PostedDate" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsCategories">
+            <EntityTypeMapping TypeName="WebsiteDBModel.NewsCategory">
+              <MappingFragment StoreEntitySet="NewsCategory">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccessControlLists">
+            <EntityTypeMapping TypeName="WebsiteDBModel.AccessControlList">
+              <MappingFragment StoreEntitySet="AccessControlList">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccessLists">
+            <EntityTypeMapping TypeName="WebsiteDBModel.AccessList">
+              <MappingFragment StoreEntitySet="AccessList">
+                <ScalarProperty Name="ParentMenu" ColumnName="ParentMenu" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="RelativeLink" ColumnName="RelativeLink" />
+                <ScalarProperty Name="MenuDisplayText" ColumnName="MenuDisplayText" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleInfoes">
+            <EntityTypeMapping TypeName="WebsiteDBModel.RoleInfo">
+              <MappingFragment StoreEntitySet="RoleInfo">
+                <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfoes">
+            <EntityTypeMapping TypeName="WebsiteDBModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PassCode" ColumnName="PassCode" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="WebsiteDBModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BannerImages">
+            <EntityTypeMapping TypeName="WebsiteDBModel.BannerImage">
+              <MappingFragment StoreEntitySet="BannerImage">
+                <ScalarProperty Name="BannerType" ColumnName="BannerType" />
+                <ScalarProperty Name="BannerDescription" ColumnName="BannerDescription" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BillOfLadings">
+            <EntityTypeMapping TypeName="WebsiteDBModel.BillOfLading">
+              <MappingFragment StoreEntitySet="BillOfLading">
+                <ScalarProperty Name="Acceptor" ColumnName="Acceptor" />
+                <ScalarProperty Name="IsReadOnly" ColumnName="IsReadOnly" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="ActualReceiver" ColumnName="ActualReceiver" />
+                <ScalarProperty Name="ReceiverContactName" ColumnName="ReceiverContactName" />
+                <ScalarProperty Name="FailNote" ColumnName="FailNote" />
+                <ScalarProperty Name="LadingStatus" ColumnName="LadingStatus" />
+                <ScalarProperty Name="Reason2" ColumnName="Reason2" />
+                <ScalarProperty Name="RetransferTime2" ColumnName="RetransferTime2" />
+                <ScalarProperty Name="Reason1" ColumnName="Reason1" />
+                <ScalarProperty Name="RetransferTime1" ColumnName="RetransferTime1" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="DeliveryStaff" ColumnName="DeliveryStaff" />
+                <ScalarProperty Name="ReceiverTel" ColumnName="ReceiverTel" />
+                <ScalarProperty Name="ReceiverAddress" ColumnName="ReceiverAddress" />
+                <ScalarProperty Name="Receiver" ColumnName="Receiver" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="SenderTel" ColumnName="SenderTel" />
+                <ScalarProperty Name="SenderContactName" ColumnName="SenderContactName" />
+                <ScalarProperty Name="SenderAddress" ColumnName="SenderAddress" />
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+                <ScalarProperty Name="BillCode" ColumnName="BillCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="WebsiteDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
+                <ScalarProperty Name="ContactCellPhone" ColumnName="ContactCellPhone" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,87 @@
+﻿@using VTGPost.Helper
+@model VTGPost.Models.BillOfLading
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null)
+{
+<h2 style="color:red; text-align:center;">Định vị bưu phẩm</h2>
+<div class="tracking"  style="margin:10px 0 20px 15px;">
+    <p class="tracing" style="margin-top:10px;">Thông tin bưu phẩm</p>
+    <ul class="tracing">
+        <li>Mã bưu phẩm: <strong>@Model.BillCode</strong></li>
+        <li>Họ tên người gửi: <strong>@Model.Sender</strong></li>
+        <li>Địa chỉ: <strong>@Model.SenderAddress</strong></li>
+        <li>Người liên hệ: <strong>@Model.SenderContactName</strong></li>
+        <li>Ngày gửi: <strong>@Model.SentDate.ToString("dd-MM-yyyy")</strong></li>
+    </ul>
+    <p class="tracing">Tình trạng bưu phẩm</p>
+    <ul class="tracing">
+        <li>Trạng thái: <strong>@SiteConfig.LadingStatus[Model.LadingStatus]</strong></li>
+        <li>Ngày nhận: @if(Model.ReceivedDate!=null)
+                       {
+                           <strong>@Model.ReceivedDate.Value.ToString("dd-MM-yyyy lúc HH:mm")</strong>
+                       }else{
+                           <strong>...</strong>
+                       }
+        </li>
+        <li>Người ký nhận: @if(string.IsNullOrEmpty(Model.ActualReceiver))
+                       {
+                           <strong>...</strong>
+                       }else{
+                               <strong>@Model.ActualReceiver</strong>
+                       }
+        </li>
+        <li>Phát lại lần 1: @if(Model.RetransferTime1 !=null)
+                       {
+                           <strong>@Model.RetransferTime1.Value.ToString("dd-MM-yyyy")</strong>
+                       }else{
+                           <strong>...</strong>
+                       }
+        </li>
+        <li>Lý do: @if(string.IsNullOrEmpty(Model.Reason1))
+                       {
+                           <strong>...</strong>
+                       }else{
+                            <strong>@Model.Reason1</strong>
+                       }
+        </li>
+        <li>Phát lại lần 2: @if(Model.RetransferTime2 != null)
+                       {
+                           <strong>@Model.RetransferTime2.Value.ToString("dd-MM-yyyy")</strong>
+                       }else{
+                           <strong>...</strong>
+                       }
+        </li>
+        <li>Lý do: @if(string.IsNullOrEmpty(Model.Reason2))
+                   {
+                       <strong>...</strong>
+                   }else{
+                       <strong>@Model.Reason2</strong>
+                   }
+        </li>
+        @if(Model.LadingStatus == SiteConfig.FailStatus && string.IsNullOrEmpty(Model.FailNote))
+        {
+            <li>Lý do không chuyển được: <strong>@Model.FailNote</strong></li>
+        }
+    </ul>
+</div>
+}
+else
+{
+    <div class="tracking">
+        <fieldset>
+            <legend>Định vị bưu phẩm</legend>
+            @using (Html.BeginForm("TrackAndTrace", "Home", FormMethod.Post))
+            {
+                <textarea name="tracking_id" id="tracking_id" placeholder="Mã BP/BK"></textarea>
+                <button class="btn" type="submit">Tracking</button>
+            }
+        </fieldset>
+    </div>
+    <p style="font-size:large; color: darkblue;">
+        Mã BP/BK bạn nhập không tồn tại. Vui lòng nhập chính xác mã BP/BK in trên hoá đơn hoặc liên hệ với chúng tôi để được hướng dẫn.
+    </p>
+}

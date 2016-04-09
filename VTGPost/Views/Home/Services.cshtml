@@ -1,0 +1,24 @@
+﻿@using VTGPost.Helper
+@model VTGPost.Models.News
+
+@{
+    ViewBag.Title = "Services";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null)
+{
+    
+    <h1>@Model.Title</h1>
+    
+    @Html.Raw(Model.Content)
+}
+
+<h4 class="newsList">Các dịch vụ khác</h4>
+@foreach(var item in (List<VTGPost.Models.News>)HttpContext.Current.Cache[SiteConfig.ServicePagesCache])
+{
+    <ul>
+        <li>@Html.ActionLink(item.Title, "Services", "Home", new { id = item.NewsId }, null)</li>
+    </ul>
+}
+

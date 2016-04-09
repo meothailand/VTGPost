@@ -1,0 +1,37 @@
+/* here you can put your own css to customize and override the theme */
+
+.messageBox {
+    color: red;
+    text-align: center;
+    font-size: 12pt;
+}
+
+.hideMessage {
+    display: none
+}
+
+.seperator {
+    text-align: left;
+    color: blue;
+    font-size: 10pt;
+    margin: 10px 0px;
+    font-weight: bold;
+}
+
+.overdued {
+    color: maroon!important;
+}
+
+.warningRecord {
+    color:  magenta!important;
+}
+
+.dataTable thead {
+    background-color: #FFB848;
+}
+
+img.bannerThumb {
+    height: 50px;
+    margin: 5px; 
+}
+

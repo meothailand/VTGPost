@@ -1,0 +1,131 @@
+﻿@using VTGPost.Helper
+@model VTGPost.Models.Customer
+
+@{
+    Layout = "~/Areas/ManageSite/Views/Shared/_ManageSiteLayout.cshtml";
+}
+
+@section CustomStyle{
+    <link href="@Href("~/Content/backend/plugins/select2/select2_metro.css")" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="@Href("~/Content/backend/plugins/bootstrap-fileupload/bootstrap-fileupload.css")"/>
+}
+
+<div class="portlet box messageBox">
+     <span class="messageBox">@ViewBag.SaveMessage</span>
+</div>
+<div class="portlet box yellow">
+<div class="portlet-title">
+    <div class="caption">
+       <i class="fa fa-reorder"></i>Customer - Cập nhật thông tin khách hàng							
+    </div>
+    <div class="tools">
+        <a href="javascript:;" class="collapse"></a>
+    </div>
+</div>
+<div class="portlet-body form">
+    <!-- BEGIN FORM-->
+    @using (Html.BeginForm("EditCustomer", "ManageCustomer", FormMethod.Post, new { @class="form-horizontal", @enctype="multipart/form-data"})){
+        <div class="form-actions top fluid">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn green">Submit</button>
+                <button type="button" class="btn default" onclick="javascript:window.location.href='/ManageSite/ManageCustomer/Customers';">Cancel</button>
+            </div>
+        </div>
+        <div class="form-body">
+           @Html.HiddenFor(i => i.Id)
+            <div class="form-group">
+                <label class="col-md-3 control-label">Customer name (Tên KH)</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(i => i.CustomerName, new { @class="form-control", @placeholder="Customer name - Maximum 100 characters", @maxlength="100"})
+                    @*<span class="help-block">A block of help text.
+                    </span>*@
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Customer address (Địa chỉ)</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(i => i.CustomerAddress, new { @class="form-control", @placeholder="Customer address - Maximum 300 characters", @maxlength="300"})
+                    @*<span class="help-block">A block of help text.
+                    </span>*@
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Contact Person (Người liên hệ)</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(i => i.ContactPerson, new { @class="form-control maxlengthCheck", 
+                                                                 @placeholder="Contact person name - Maximum 50 characters", 
+                                                                 @maxlength="50"})
+                </div>
+                <label class="col-md-2 control-label">Website</label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(i => i.Website, new { @class="form-control maxlengthCheck", 
+                                                           @placeholder="http://", 
+                                                           @maxlength="100"})
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Contact Number (ĐT)</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(i => i.ContactNumber, new { @class="form-control maxlengthCheck", 
+                                                           @placeholder="Contact number", 
+                                                           @maxlength="20"})
+                </div>
+                <label class="control-label col-md-2">Cellphone (Di động)</label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(i => i.ContactCellPhone, new { @class="form-control maxlengthCheck", 
+                                                           @placeholder="Contact cell phone", 
+                                                           @maxlength="20"})
+                </div>
+            </div>
+            @if(Model != null && !string.IsNullOrEmpty(Model.Logo))
+            {
+            <div class="form-group">
+                <label class="col-md-3 control-label">Current logo (logo hiện tại)</label>
+                <div class="col-md-9">
+                     @Html.HiddenFor(i => i.Logo)
+                    <img src="@Href(SiteConfig.CustomerLogo + Model.Logo)" 
+                         alt="@Model.CustomerName" title="@Model.CustomerName" />
+                    <span class="help-block">
+                    </span>
+                </div>
+            </div>
+            }
+            <div class="form-group last">
+                <label class="control-label col-md-3">Logo</label>
+                <div class="col-md-9">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                        <input name="" value="" type="hidden">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <span class="uneditable-input">
+                                    <i class="fa fa-file fileupload-exists"></i>
+                                    <span class="fileupload-preview"></span>
+                                </span>
+                            </span>
+                            <span class="btn default btn-file">
+                                <span class="fileupload-new">
+                                    <i class="fa fa-paper-clip"></i>Select file
+                                </span>
+                                <span class="fileupload-exists">
+                                    <i class="fa fa-undo"></i>Change
+                                </span>
+                                <input name="logoImg" class="default" type="file">
+                            </span>
+                            <a href="#" class="btn red fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i>Remove</a>
+                        </div>
+                    </div>
+                    <span class="help-block">Best image dimensions 166 x 90 (Kích thước logo 166 x 90)</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-actions fluid">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn green">Submit</button>
+                <button type="button" class="btn default" onclick="javascript:window.location.href='/ManageSite/ManageCustomer/Customers';">Cancel</button>
+            </div>
+        </div>
+    }
+    <!-- END FORM-->
+</div>
+								
+</div>

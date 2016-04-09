@@ -1,0 +1,128 @@
+﻿@using VTGPost.Helper
+@model List<VTGPost.Models.HotLine>
+
+@{
+    ViewBag.Title = "Contacts";
+    Layout = "~/Areas/ManageSite/Views/Shared/_ManageSiteLayout.cshtml";
+}
+
+@section CustomStyle{
+    <link rel="stylesheet" href="@Href("~/Content/backend/plugins/data-tables/DT_bootstrap.css")"/>
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box messageBox">
+            <span class="messageBox">@ViewBag.SaveMessage</span>
+        </div>
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box yellow">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-edit"></i>Danh sách thông tin
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="btn-group">
+                        @*<button id="sample_editable_1_new" class="btn green">*@
+                        <a href="/ManageSite/ManageContactInfo/AddHotline">Thêm thông tin</a> <i class="fa fa-plus"></i>
+                        @*</button>*@
+                    </div>
+                </div>
+                <div id="sample_editable_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                    <div class="row">
+                        
+                    </div>
+                    <div class="table-scrollable">
+                        <table style="width: 1060px;" aria-describedby="sample_editable_1_info" class="table table-striped table-hover table-bordered dataTable" id="sample_editable_1">
+                            <thead>
+                                <tr role="row">
+                                    <th aria-label="Points: activate to sort column ascending"
+                                        style="width: 400px;" colspan="1" rowspan="1" aria-controls="sample_editable_1" tabindex="0" role="columnheader" >Tên đăng nhập
+                                    </th>
+                                    <th aria-label="User name" style="width: 227px;" colspan="1" rowspan="1" role="columnheader" class="">Loại dịch vụ
+                                    </th>
+                                    <th aria-label="Full Name: activate to sort column ascending"
+                                        style="width: 100px;" colspan="1" rowspan="1" aria-controls="sample_editable_1" tabindex="0" role="columnheader">Tên hiển thị
+                                    </th>
+                                    <th aria-label="Edit: activate to sort column ascending"
+                                        style="width: 99px;" colspan="1" rowspan="1" aria-controls="sample_editable_1" tabindex="0" role="columnheader" >Cập Nhật
+                                    </th>
+                                    <th aria-label="Delete: activate to sort column descending"
+                                        aria-sort="ascending" style="width: 134px;" colspan="1" rowspan="1" aria-controls="sample_editable_1" tabindex="0" role="columnheader">Xoá
+                                </tr>
+                            </thead>
+
+                            <tbody aria-relevant="all" aria-live="polite" role="alert">
+                                @{
+                                    var count = 1;
+                                    var trClass = string.Empty;
+                                    foreach (var line in Model)
+                                    {
+                                        trClass = count % 2 == 0 ? "even" : "odd";
+                                        
+                                        <tr class="@trClass">
+                                            <td class="">@line.LoginName</td>
+                                            <td class="">@line.LineType</td>
+                                            <td class="center ">@line.DisplayText</td>
+                                            <td class=" ">@Html.ActionLink("Edit", "EditHotline", new { @id=line.Id}, new { @class="edit"})</td>
+                                            <td class="sorting_1"><a class="delete" 
+                                                                     href="/ManageSite/ManageContactInfo/DeleteLine/@line.Id"
+                                                                     onclick="javascript: return confirm('Bạn muốn xoá thông tin này?');">Delete</a></td>
+                                        </tr>
+                                        count++;
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        @{
+                            var page = (VTGPost.Helper.PagingHelper) ViewBag.Paging;
+                            var viewPage = page.CurrentPage > 5 ? page.CurrentPage - 3 : 1;
+                            var viewPageCount = 0;
+                            <div class="col-md-5 col-sm-12">
+                                <div id="sample_editable_1_info" class="dataTables_info">Hiển thị @(page.TotalRecord == 0 ? 0 : page.StartRecord) tới @page.EndRecord trong @page.TotalRecord mục</div>
+                            </div>
+                            <div class="col-md-7 col-sm-12">
+                                <div class="dataTables_paginate paging_bootstrap">
+                                    <ul style="visibility: visible;" class="pagination">
+                                        @if(page.CurrentPage <= 1)
+                                        {
+                                            <li class="prev disabled"><a href="javascript:void();" title="Prev"><i class="fa fa-angle-left"></i></a></li>
+                                        }else
+                                        {
+                                            <li class="prev"><a href="/ManageSite/ManageContactInfo/Hotlines?page=@(page.CurrentPage-1)" title="Prev"><i class="fa fa-angle-left"></i></a></li>
+                                        }
+                                    
+                                        @for(int i = viewPage; i <= page.TotalPage; i++)
+                                        {
+                                            if (viewPageCount == 5) { break; }
+                                            if(i == page.CurrentPage){
+                                                <li class="active"><a href="/ManageSite/ManageContactInfo/Hotlines?page=@i">@i</a></li>
+                                            }else{
+                                                <li><a href="/ManageSite/ManageContactInfo/Hotlines?page=@i">@i</a></li>
+                                            }
+                                            viewPageCount += 1;
+                                        }
+
+                                        @if(page.CurrentPage == page.TotalPage)
+                                        {
+                                            <li class="next disabled"><a href="javascript:void();" title="Next"><i class="fa fa-angle-right"></i></a></li>
+                                        }else
+                                        {
+                                            <li class="next"><a href="/ManageSite/ManageContactInfo/Hotlines?page=@(page.CurrentPage+1)" title="Next"><i class="fa fa-angle-right"></i></a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+
+</div>

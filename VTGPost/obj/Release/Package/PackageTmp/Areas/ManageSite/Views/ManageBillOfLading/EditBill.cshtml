@@ -1,0 +1,244 @@
+﻿@using VTGPost.Helper
+@model VTGPost.Models.BillOfLading
+
+@{
+    Layout = "~/Areas/ManageSite/Views/Shared/_ManageSiteLayout.cshtml";
+    var currentDate = DateTime.Now.ToString("dd-MM-yyyy");
+}
+
+@section CustomStyle{
+    <link href="@Href("~/Content/backend/plugins/select2/select2_metro.css")" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="@Href("~/Content/backend/plugins/bootstrap-datetimepicker/css/datetimepicker.css")"/>
+}
+
+@section CustomScript{
+    <script type="text/javascript" src="@Href("~/Content/backend/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js")"></script>
+    <script type="text/javascript" src="@Href("~/Content/backend/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js")"></script>
+}
+
+@section handleTimePicker{
+    handleDatetimePicker();
+}
+
+<div class="portlet box messageBox">
+     <span class="messageBox">@ViewBag.SaveMessage</span>
+</div>
+<div class="portlet box yellow">
+<div class="portlet-title">
+    <div class="caption">
+       <i class="fa fa-reorder"></i>Bill Of Lading - Update Bill - Cập nhật vận đơn						
+    </div>
+    <div class="tools">
+        <a href="javascript:;" class="collapse"></a>
+    </div>
+</div>
+<div class="portlet-body form">
+    <!-- BEGIN FORM-->
+    @using (Html.BeginForm("EditBill", "ManageBillOfLading", FormMethod.Post, new { @class="form-horizontal"})){
+        <div class="form-actions top fluid">
+            <div class="col-md-offset-3 col-md-9">
+                @if(Model.IsReadOnly){
+                    <button type="button" class="btn green" onclick="javascript:alert('Vận đơn đã đóng. Không thể chỉnh sửa thông tin vận đơn.');return;">Submit</button>
+                }else{
+                    <button type="submit" class="btn green">Submit</button>
+                }
+                <button type="button" class="btn default" onclick="javascript:window.location.href='/ManageSite/ManageBillOfLading/Bills';">Cancel</button>
+            </div>
+        </div>
+        <div class="form-body">
+            <div class="form-group">
+                <label class="col-md-3 control-label">Bill code (mã vận đơn)</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(i => i.BillCode, new { @class="form-control", @placeholder="Enter text", @maxlength="20", @readonly="true"})
+                    <span class="help-block">Bill code is required [Trường bắt buộc]
+                    </span>
+                </div>
+                <label class="col-md-2 control-label">Acceptor (NV nhận)</label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(i => i.Acceptor, new { @class = "form-control", @placeholder="Acceptor name", @maxlength="50" })
+                </div>
+            </div>
+            <!--Sender information-->
+            <div class="form-group">
+                <div class="col-md-12 seperator">
+                    Sender Information [Thông tin người gửi]
+                </div>
+            </div>
+            <hr />
+            <div class="form-group">
+                <label class="col-md-3 control-label">Name (Tên)</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(i => i.Sender, new { @class="form-control", @placeholder="Sender name", @maxlength="50"})
+                </div>
+                <label class="col-md-2 control-label">Tel No. (Số ĐT)</label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(i => i.SenderTel, new { @class="form-control", @placeholder="Sender number", @maxlength="20"})
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Address (Địa chỉ)</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(i => i.SenderAddress, new { @class="form-control", @placeholder="Sender address", @maxlength="300"})
+                    @*<span class="help-block">A block of help text.
+                    </span>*@
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Contact Name (Tên người liên hệ)</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(i => i.SenderContactName, new { @class="form-control", @placeholder="Contact name", @maxlength="50"})
+                </div>
+                <label class="col-md-2 control-label">Sent Date (Ngày gửi)</label>
+                <div class="col-md-3">
+                    <div class="input-group input-medium date date-picker" data-date="@Model.SentDate.ToString("dd-MM-yyyy")" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                        @Html.TextBox("sentDate", (Model != null) ? Model.SentDate.ToString("dd-MM-yyyy") : null, new { @class = "form-control", @readonly="readonly" })
+                        <span class="input-group-btn">
+                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                </div>
+            </div>
+             <div class="form-group">
+                <label class="col-md-3 control-label">Customer (Khách hàng)</label>
+                <div class="col-md-4">
+                    <select class="form-control input-large select2me" data-placeholder="Chọn khách hàng...">
+                        <option value=""></option>
+                        @foreach(var item in (SelectList)ViewBag.Customer)
+                        {
+                            if(item.Selected)
+                             {
+                                 <option value="@item.Value" selected="selected">@item.Text</option>
+                                 continue;
+                             }
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <!--Receiver information-->
+            <div class="form-group">
+                <div class="col-md-12 seperator">
+                    Receiver Information [Thông tin người nhận]
+                </div>
+            </div>
+            <hr/>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Name (Tên)</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(i => i.Receiver, new { @class="form-control", @placeholder="Receiver name", @maxlength="50"})
+                </div>
+                <label class="col-md-2 control-label">Tel No. (Số ĐT)</label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(i => i.ReceiverTel, new { @class="form-control", @placeholder="Receiver number", @maxlength="20"})
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Address (Địa chỉ)</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(i => i.ReceiverAddress, new { @class="form-control", @placeholder="Receiver address", @maxlength="300"})
+                    @*<span class="help-block">A block of help text.
+                    </span>*@
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Contact Name (Tên người liên hệ)</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(i => i.ReceiverContactName, new { @class="form-control", @placeholder="Contact name", @maxlength="50"})
+                </div>
+            </div>
+            <!--Bill status information-->
+            <div class="form-group">
+                <div class="col-md-12 seperator">
+                    Bill Status Information [Thông tin vận đơn]
+                </div>
+            </div>
+            <hr />
+            <div class="form-group">
+                <label class="col-md-3 control-label">Receiver (Người ký nhận)</label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(i => i.ActualReceiver, new { @class="form-control", @placeholder="Actual receiver", @maxlength="50"})
+                </div>
+                <label class="col-md-2 control-label">Delivery Staff (NV giao)</label>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(i => i.DeliveryStaff, new { @class="form-control", @placeholder="Delivery staff name", @maxlength="50"})
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Status (Tình trạng giao nhận)</label>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(i => i.LadingStatus, new SelectList(SiteConfig.LadingStatus, "Key", "Value", Model.LadingStatus), new { @class = "form-control input-medium select2me" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Received Date (Ngày nhận)</label>
+                <div class="col-md-4">
+                    <div class="input-group date form_datetime">
+                        @Html.TextBox("receivedDate", (Model != null && Model.ReceivedDate.HasValue) ? Model.ReceivedDate.Value.ToString("dd MMM yyyy - HH:mm") : null, new { @class = "form-control", @readonly="readonly", @size="16" })
+                        @*<input type="text" size="16" readonly class="form-control">*@
+                        <span class="input-group-btn">
+                            <button class="btn default date-set" type="button"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Retransfer 1 (Phát lại lần 1)</label>
+                <div class="col-md-9">
+                    <div class="input-group input-medium date date-picker" data-date="@currentDate" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                        @Html.TextBox("retransferTime1", (Model != null && Model.RetransferTime1.HasValue) ? Model.RetransferTime1.Value.ToString("dd-MM-yyyy") : null, new { @class = "form-control", @readonly="readonly" })
+                        <span class="input-group-btn">
+                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Reason (Lý do)</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(i => i.Reason1, new { @class="form-control", @placeholder="Retransfer reason", @maxlength="200"})
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Retransfer 2 (Phát lại lần 2)</label>
+                <div class="col-md-9">
+                    <div class="input-group input-medium date date-picker" data-date="@currentDate" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                        @Html.TextBox("retransferTime2", (Model != null && Model.RetransferTime2.HasValue) ? Model.RetransferTime2.Value.ToString("dd-MM-yyyy") : null, new { @class = "form-control", @readonly="readonly" })
+                        <span class="input-group-btn">
+                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Reason (Lý do)</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(i => i.Reason2, new { @class="form-control", @placeholder="Retransfer reason", @maxlength="200"})
+                </div>
+            </div>
+            <div class="form-group last">
+                <label class="control-label col-md-3">Fail Note (Lý do không chuyển được)</label>
+                <div class="col-md-9">
+                   @Html.TextBoxFor(i => i.FailNote, new { @class="form-control", @placeholder="Fail note", @maxlength="100"})
+                </div>
+            </div>
+        </div>
+        <div class="form-actions fluid">
+            <div class="col-md-offset-3 col-md-9">
+                 @if(Model.IsReadOnly){
+                    <button type="button" class="btn green" onclick="javascript:alert('Vận đơn đã đóng. Không thể chỉnh sửa thông tin vận đơn.');return;">Submit</button>
+                }else{
+                    <button type="submit" class="btn green">Submit</button>
+                }
+                <button type="button" class="btn default" onclick="javascript:window.location.href='/ManageSite/ManageBillOfLading/Bills';">Cancel</button>
+            </div>
+        </div>
+    }
+    <!-- END FORM-->
+</div>
+								
+</div>
+					

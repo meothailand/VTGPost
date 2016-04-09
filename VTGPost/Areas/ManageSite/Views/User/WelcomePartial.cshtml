@@ -1,0 +1,143 @@
+﻿@model VTGPost.Models.BaseModel.UserInfoBase
+
+<div class="portlet box messageBox">
+     <span class="messageBox">@ViewBag.SaveMessage</span>
+</div>
+<div class="portlet box yellow">
+<div class="portlet-title">
+    <div class="caption">
+       <i class="fa fa-reorder"></i>User - Thông tin tài khoản							
+    </div>
+    <div class="tools">
+        <a href="javascript:;" class="collapse"></a>
+    </div>
+</div>
+<div class="portlet-body form">
+    <!-- BEGIN FORM-->
+    @using (Html.BeginForm("ChangePassword", "User", FormMethod.Post, new { @class="form-horizontal"})){
+        <div class="form-actions top fluid">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn green">Submit</button>
+                <button type="button" class="btn default" onclick="javascript:window.location.href='/ManageSite/User/SiteMessage/1';">Cancel</button>
+            </div>
+        </div>
+        <div class="form-body">
+            <div class="form-group">
+                <label class="col-md-3 control-label">Tên nhân viên</label>
+                <div class="col-md-4">
+                    @Html.HiddenFor(i=>i.FullName)
+                    @Html.LabelFor(i => i.FullName, Model.FullName, new { @class="form-control"})
+                    @*<span class="help-block">A block of help text.
+                    </span>*@
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Tên đăng nhập</label>
+                <div class="col-md-4">
+                    @Html.HiddenFor(i=>i.UserName)
+                    @Html.LabelFor(i => i.UserName, Model.UserName, new { @class = "form-control maxlengthCheck" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Đổi mật khẩu</label>
+                <div class="col-md-4">
+                    @Html.CheckBoxFor(i => i.ResetPassword, new { @class="form-control", 
+                                                                  @onClick="javascript:EnablePasswordField(this);"})
+                </div>
+            </div>
+            @if (Model.ResetPassword)
+            {
+                <div class="form-group">
+                    <label class="control-label col-md-3">Mật khẩu hiện tại</label>
+                    <div class="col-md-4">
+                        @Html.Password("currentPassword", null, new
+                   {
+                       @class = "form-control maxlengthCheck",
+                       @placeholder = "Password must contain at least 6 characters",
+                       @maxlength = "20"
+                   })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">Mật khẩu mới</label>
+                    <div class="col-md-4">
+                        @Html.PasswordFor(i => i.NewPassword, new
+                   {
+                       @class = "form-control maxlengthCheck",
+                       @placeholder = "Password must contain at least 6 characters",
+                       @maxlength = "20"
+                   })
+                        <span class="help-block">Mật khẩu phải dài ít nhất 6 ký tự</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">Lập lại mật khẩu mới</label>
+                    <div class="col-md-4">
+                        @Html.PasswordFor(i => i.NewPassword2, new
+                   {
+                       @class = "form-control maxlengthCheck",
+                       @placeholder = "Password must contain at least 6 characters",
+                       @maxlength = "20"
+                   })
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label class="control-label col-md-3">Mật khẩu hiện tại</label>
+                    <div class="col-md-4">
+                        @Html.Password("currentPassword", null, new
+                   {
+                       @class = "form-control maxlengthCheck",
+                       @placeholder = "Password must contain at least 6 characters",
+                       @maxlength = "20",
+                       @disabled = "disabled"
+                   })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">Mật khẩu mới</label>
+                    <div class="col-md-4">
+                        @Html.PasswordFor(i => i.NewPassword, new
+                   {
+                       @class = "form-control maxlengthCheck",
+                       @placeholder = "Password must contain at least 6 characters",
+                       @maxlength = "20",
+                       @disabled = "disabled"
+                   })
+                        <span class="help-block">Mật khẩu phải dài ít nhất 6 ký tự</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">Lập lại mật khẩu</label>
+                    <div class="col-md-4">
+                        @Html.PasswordFor(i => i.NewPassword2, new
+                   {
+                       @class = "form-control maxlengthCheck",
+                       @placeholder = "Password must contain at least 6 characters",
+                       @maxlength = "20",
+                       @disabled = "disabled"
+                   })
+                    </div>
+                </div>
+            }
+           
+            <div class="form-group last">
+                <label class="control-label col-md-3">Active (Đang hoạt động)</label>
+                <div class="col-md-9">
+                    @Html.CheckBoxFor(i => i.IsActive, new { @class="form-control", @readonly = true })
+                </div>
+            </div>
+        </div>
+        <div class="form-actions fluid">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn green">Submit</button>
+                <button type="button" class="btn default" onclick="javascript:window.location.href='/ManageSite/User/SiteMessage/1';">Cancel</button>
+            </div>
+        </div>
+    }
+    <!-- END FORM-->
+</div>
+								
+</div>

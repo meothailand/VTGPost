@@ -1,0 +1,26 @@
+.btn {
+  background: #dc3030;
+  background-image: -webkit-linear-gradient(top, #dc3030, #dc3030);
+  background-image: -moz-linear-gradient(top, #dc3030, #dc3030);
+  background-image: -ms-linear-gradient(top, #dc3030, #dc3030);
+  background-image: -o-linear-gradient(top, #dc3030, #dc3030);
+  background-image: linear-gradient(to bottom, #dc3030, #dc3030);
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 3px 5px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #c72a2a;
+  background-image: -webkit-linear-gradient(top, #c72a2a, #a82828);
+  background-image: -moz-linear-gradient(top, #c72a2a, #a82828);
+  background-image: -ms-linear-gradient(top, #c72a2a, #a82828);
+  background-image: -o-linear-gradient(top, #c72a2a, #a82828);
+  background-image: linear-gradient(to bottom, #c72a2a, #a82828);
+  text-decoration: none;
+}

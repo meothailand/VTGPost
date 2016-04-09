@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Areas/ManageSite/Views/Shared/_ManageSiteLayout.cshtml";
+    
+}
+
+@section CustomStyle{
+    <link href="@Href("~/Content/backend/css/pages/error.css")" rel="stylesheet" type="text/css"/>
+}
+
+@section CustomScript{
+    <script type="text/javascript">
+        function EnablePasswordField(cbx) {
+            if (cbx.checked) {
+                $('#currentPassword').removeAttr("disabled");
+                $('#NewPassword').removeAttr("disabled");
+                $('#NewPassword2').removeAttr("disabled");
+            } else {
+                $('#currentPassword').attr("disabled", 'disabled');
+                $('#NewPassword').attr('disabled', 'disabled');
+                $('#NewPassword2').attr('disabled', 'disabled');
+            }
+        }
+    </script>
+}
+
+@{
+    int type = ViewBag.MessageType;
+    switch(type)
+    {
+        case 1:
+            Html.RenderPartial("WelcomePartial");
+            break;
+        case 2:
+            Html.RenderPartial("ActivationPartial");
+            break;
+        case 3:
+            Html.RenderPartial("UnauthorizedAccessPartial");
+            break;
+    }
+}

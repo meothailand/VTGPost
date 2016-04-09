@@ -1,0 +1,33 @@
+﻿@using VTGPost.Helper
+@using VTGPost.Models
+@model VTGPost.Models.News
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section ads{
+    <div class="ads">
+        <div id="rondellCarousel" class="hidden">
+            @{
+                foreach (var banner in (List<BannerImage>) ViewBag.Ads)
+                {
+                    <a target="_blank" rel="rondell_1" href="@Href(SiteConfig.AdsFolder + banner.ImageName)" title="@banner.Title">
+                        <img src="@Href(SiteConfig.AdsFolder + banner.ImageName)" alt="@banner.Title" title="@banner.Title" />
+                        <h5>@banner.Title</h5>
+                        <p>@banner.BannerDescription</p>
+                    </a>
+                }
+            }
+        </div>
+    </div>
+}
+
+@Html.Raw(HttpUtility.HtmlDecode(Model.Content))
+
+@*<h1>Instructions</h1>
+<p align="justify">
+Lorem ipsum dolor sit amet, placerat vivamus a, arcu vestibulum nulla id libero non et, mollis tristique consequat tempus facilisi at, ut a. Purus wisi a, in lorem dolor quam, mauris vestibulum metus sit. Pede interdum velit dis enim. Lectus elit, ligula ut eu non dapibus eget, porttitor sed dui porta, vestibulum eu, non gravida quisque mollis. Ante scelerisque elit vel felis, natoque vel torquent turpis cras habitant eget, ut dignissim eget perspiciatis tellus sit amet, felis reprehenderit aliquam litora libero per.</p>
+<h2>Clearing</h2>
+<p align="justify">
+In et orci maecenas voluptatem, nunc montes felis etiam mattis sodales, arcu sodales morbi nisl enim dolor suspendisse, lorem mattis, varius eget etiam massa metus tristique orci. Porttitor urna a non suscipit vivamus, quam purus semper dictum velit ullamcorper sed, vel sapien ac, et ut molestie in. Morbi curabitur massa consequat urna curabitur lacus, nec commodo faucibus condimentum suspendisse donec elementum. Non ac, dolor vitae wisi, tempus ut luctus sit volutpat, mi maecenas vehicula ac augue tellus lectus, gravida integer. Consectetuer interdum maecenas fusce sed venenatis, mi luctus morbi orci, proin qui. Pede aliquet cras wisi neque velit pellentesque, consequat aliquam ut rhoncus ut pellentesque magna, mollis quis est eget feugiat, tempor et elit, lobortis elit vestibulum donec sollicitudin.</p>*@

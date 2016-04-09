@@ -1,0 +1,65 @@
+﻿@{
+    Layout = "~/Areas/ManageSite/Views/Shared/_ManageSiteLayout.cshtml";
+}
+
+@section CustomStyle{
+    <link href="@Href("~/Content/backend/css/pages/error.css")" rel="stylesheet" type="text/css"/>
+}
+
+<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+<div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                Widget settings form goes here
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn blue">Save changes</button>
+                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+<!-- BEGIN PAGE HEADER-->
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">Activation Required <small>activation required</small>
+        </h3>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12 page-404">
+        <div class="number">
+            Activation Required
+        </div>
+        <div class="details">
+            <h3>Oops! Your trial session is expired. Please pay for the license to continue using this web.</h3>
+            @*<p>
+                You do not have the privilege to access this page or the page you are looking for does not exist.<br />
+                If you need to access this page ask your manager for help.<br />
+                Back to <a href="@ViewBag.PreviousPage">previous page</a>
+            </p>*@
+        </div>
+        <div class="details">
+            <h3>Oops! Thời gian sử dụng thử phần mềm của bạn đã hết. Vui lòng trả tiền bản quyền để tiếp tục sử dụng.</h3>
+            @*<p>
+                Trang web bạn đang tìm không tồn tại hoặc bạn không có quyền để truy cập trang web này.<br />
+                Nếu bạn cần phải truy cập trang này hãy liên hệ với quản lý của bạn để được trợ giúp.<br />
+                Vui lòng quay về <a href="@ViewBag.PreviousPage">trang trước</a>
+            </p>*@
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
