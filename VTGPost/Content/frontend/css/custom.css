@@ -96,6 +96,7 @@ div.main-menu{
 	padding: 0px 0px 0px 0px;
 	background: yellow;
 	margin: 5px 10px;
+    z-index: 1;
 }
 
 ul.MenuBarHorizontal a {
